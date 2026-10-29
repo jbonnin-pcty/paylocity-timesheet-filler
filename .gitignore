@@ -1,0 +1,5 @@
+# local test pages and packaging leftovers
+_*.html
+*.zip
+Thumbs.db
+.DS_Store

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Timesheet Filler settings</title>
+  <link rel="stylesheet" href="picker.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <main>
+    <h1>Timesheet Filler</h1>
+
+    <section class="card">
+      <h2>Calendar</h2>
+      <div class="segmented" role="radiogroup" aria-label="Week starts on">
+        <span class="label">Week starts on</span>
+        <label><input type="radio" name="weekStart" value="monday"><span>Monday</span></label>
+        <label><input type="radio" name="weekStart" value="sunday"><span>Sunday</span></label>
+      </div>
+      <div class="segmented" role="radiogroup" aria-label="Bank holidays" style="margin-top:10px">
+        <span class="label">Bank holidays</span>
+        <label><input type="radio" name="holidays" value="cz"><span>Czechia</span></label>
+        <label><input type="radio" name="holidays" value="none"><span>None</span></label>
+      </div>
+      <p class="help">Bank holidays are blacked out in the popup and can't be filled or selected.</p>
+    </section>
+
+    <section class="card">
+      <h2>Safety check</h2>
+      <label class="inline"><input type="checkbox" id="limitHours"> Block hours above workdays × 8 in a month</label>
+      <p class="help">Submit is blocked if a month's work + vacation hours exceed its workdays (Monday–Friday, minus bank holidays) × 8h. Untick to allow it.</p>
+    </section>
+
+    <section class="card">
+      <h2>Vacation / holiday</h2>
+      <p class="help">Right-clicking a day in the popup books it on this cost center.</p>
+      <div id="vacPicker" class="field"></div>
+    </section>
+
+    <section class="card">
+      <h2>Cost centers</h2>
+      <p class="help">The list is read from your time card the first time you open the popup. Reload it if your cost centers changed.</p>
+      <div class="inline">
+        <button id="reloadCc" class="secondary">Reload cost centers</button>
+        <span id="ccMsg" class="help"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Default template</h2>
+      <p class="help">Applied when you open the popup after saving and whenever you press "Clear selection". Favorites are available here too.</p>
+      <div class="inline spread">
+        <div class="inline">Cost centers <div id="tplCount"></div></div>
+        <label class="inline"><input type="checkbox" id="tplHalf"> Half day (4h)</label>
+      </div>
+      <div id="tplRows"></div>
+      <button id="tplClear" class="link">Remove template</button>
+      <div class="import">
+        <p class="help">Got a split link from your manager? Paste it here to load it into the template.</p>
+        <div class="inline">
+          <input type="text" id="importSplit" class="field text" placeholder="Paste the link">
+          <button id="importApply" class="secondary">Load</button>
+        </div>
+        <span id="importMsg" class="help"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Note</h2>
+      <p class="help">Added to every entry (optional).</p>
+      <input type="text" id="note" class="field text">
+    </section>
+
+    <section class="card" id="mgmtCard">
+      <button id="mgmtToggle" class="card-toggle" aria-expanded="false"><h2>Management</h2><span class="chevron">▸</span></button>
+      <div id="mgmt" hidden>
+        <p class="help">For managers: keep your team's monthly cost center split here and share it on Slack. Each person gets a link that applies the split to their template. This is saved automatically.</p>
+        <label class="inline">Month label (optional) <input type="text" id="mgmtLabel" placeholder="October 2026"></label>
+        <table id="mgmtTable"></table>
+        <button id="mgmtAdd" class="secondary">Add employee</button>
+        <p id="mgmtProblems" class="help"></p>
+        <div id="mgmtOutput" class="output" data-placeholder="The Slack message appears here once every row is complete."></div>
+        <div class="inline">
+          <button id="mgmtCopy" class="primary">Copy for Slack</button>
+          <span id="mgmtMsg" class="help"></span>
+        </div>
+        <div class="import">
+          <p class="help">Optional: paste a Slack channel link (in Slack, right-click the channel → Copy link) to get a button that copies the message and opens that channel, ready to paste.</p>
+          <div class="inline">
+            <input type="text" id="mgmtChannel" class="field text" placeholder="https://yourcompany.slack.com/archives/C0123456789">
+            <button id="mgmtOpen" class="secondary">Copy &amp; open channel</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <button id="save" class="primary">Save</button>
+      <span id="msg" class="help"></span>
+    </div>
+  </main>
+  <script src="share.js"></script>
+  <script src="picker.js"></script>
+  <script src="management.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

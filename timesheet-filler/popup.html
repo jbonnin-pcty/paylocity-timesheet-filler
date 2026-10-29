@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Timesheet Filler</title>
+  <link rel="stylesheet" href="picker.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <button id="prev" title="Previous month">‹</button>
+      <strong id="monthLabel"></strong>
+      <button id="next" title="Next month">›</button>
+    </div>
+    <a href="#" id="openOptions" title="Settings">⚙</a>
+  </header>
+
+  <div class="toggles">
+    <label><input type="checkbox" id="multi"> Select a range</label>
+    <label><input type="checkbox" id="half"> Half day (4h)</label>
+  </div>
+
+  <div id="calendar" class="calendar"></div>
+  <div class="legend-row">
+    <p class="hint"><span class="dot work"></span> work (click) &nbsp; <span class="dot vac"></span> vacation/holiday (right-click)</p>
+    <button id="clear" class="small-button" title="Unmark all days and put the cost centers back to your default template">Clear selection</button>
+  </div>
+
+  <div id="holidays" class="holidays"></div>
+
+  <section id="costCenters">
+    <div class="row">
+      <span>Cost centers</span>
+      <div id="ccCount"></div>
+    </div>
+    <div id="ccPickers"></div>
+    <div id="splitBox" hidden>
+      <input type="range" id="split" min="0" max="100" step="1">
+      <label class="row">Step %
+        <input type="number" id="splitStep" min="1" max="50" step="1">
+      </label>
+    </div>
+  </section>
+
+  <ul id="summary" class="summary"></ul>
+  <p id="problems" class="problems"></p>
+  <div class="actions">
+    <button id="submit" class="primary">Submit</button>
+  </div>
+  <div class="actions secondary-row">
+    <button id="deleteEntries" class="delete-link"></button>
+    <button id="deleteMonth" class="delete-link"></button>
+  </div>
+  <p id="status" class="status"><span id="spinner" class="spinner" hidden></span><span id="statusText"></span></p>
+
+  <script src="allocate.js"></script>
+  <script src="holidays.js"></script>
+  <script src="picker.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

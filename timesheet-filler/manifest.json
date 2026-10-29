@@ -1,0 +1,42 @@
+{
+  "manifest_version": 3,
+  "name": "Paylocity Timesheet Filler",
+  "version": "0.5.0",
+  "description": "Fill several days of your Paylocity time card at once, split across cost centers.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "permissions": ["storage", "scripting"],
+  "host_permissions": [
+    "https://corp.go.paylocity.com/*",
+    "https://2000access.paylocity.com/*"
+  ],
+  "action": {
+    "default_title": "Timesheet Filler",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://corp.go.paylocity.com/*"],
+      "js": ["capture.js"],
+      "run_at": "document_start",
+      "world": "MAIN"
+    },
+    {
+      "matches": ["https://corp.go.paylocity.com/*"],
+      "js": ["share.js", "content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}
